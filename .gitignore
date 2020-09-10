@@ -1,7 +1,3 @@
-d.n.sql
-debug.log
-d.sql
-dump.sql
 .idea
 *.pyc
 __pycache__
@@ -10,9 +6,4 @@ db.sqlite3
 /static/
 project/settings.py
 .DS_Store
-locale.zip
-/locale/
-strukture.csv
 fabfile.py
-node_modules
-yarn.lock

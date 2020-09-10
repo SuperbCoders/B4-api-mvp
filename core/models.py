@@ -7,21 +7,21 @@ from django.conf import settings
 
 
 class Company(models.Model):
-    full_name = models.TextField(max_length=1000, verbose_name='Полное название')
-    short_name = models.TextField(max_length=1000, verbose_name='Сокращенное название')
+    company_name = models.TextField(max_length=1000, verbose_name='Полное название')
+    company_short_name = models.TextField(max_length=1000, verbose_name='Сокращенное название')
 
     inn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ИНН')
     ogrn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ОГРН')
     revenue_2019 = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Доход за 2019')
     revenue_2018 = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Доход за 2018')
     revenue_growth = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Рост выручки')
-    revenue_growth_percent = models.DecimalField(max_digits=5, decimal_places=2,
+    revenue_growth_perc = models.DecimalField(max_digits=5, decimal_places=2,
                                                  verbose_name='Рост выручки в процентах')
     purchases_wins = models.PositiveIntegerField(verbose_name='Удачных покупок')
     purchases_total = models.PositiveIntegerField(verbose_name='Всего покупок')
     purchases_lost = models.PositiveIntegerField(verbose_name='Покупок потеряно')
     revenue_lost = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Потерянный доход')
-    bg_overpayment_percent = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Перепата в процентах')
+    bg_overpayment_perc = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Перепата в процентах')
     bg_sum = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Сумма')
 
     competitor_inn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ИНН Конкурента')
@@ -41,6 +41,7 @@ class Company(models.Model):
 
 
 class CompanyProp(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='company_props', on_delete=models.CASCADE, )
     company = models.ForeignKey('Company', related_name='company_props', on_delete=models.CASCADE)
     bank_name = models.CharField(max_length=250, verbose_name='Название банка')
     account_number = models.CharField(max_length=16, validators=[account_number_validator], verbose_name='Номер счета')

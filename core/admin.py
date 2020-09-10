@@ -4,7 +4,7 @@ from core.models import Company, CompanyProp, CompanyFile, CompanyRecommend, War
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'short_name', 'inn', 'ogrn', 'competitor_short_name', 'competitor_inn', 'competitor_ogrn', )
+    list_display = ('id', 'company_short_name', 'inn', 'ogrn', 'competitor_short_name', 'competitor_inn', 'competitor_ogrn', )
 
 
 class CompanyPropAdmin(admin.ModelAdmin):

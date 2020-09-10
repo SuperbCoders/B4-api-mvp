@@ -30,10 +30,24 @@ class WarrantySerializer(serializers.ModelSerializer):
 
 
 class CompanySerializer(serializers.ModelSerializer):
+    competitor = serializers.SerializerMethodField(method_name='get_competitor_dict')
+
     class Meta:
         model = Company
-        fields = ('id', 'full_name', 'short_name', 'inn', 'ogrn', 'revenue_2019', 'revenue_2018', 'revenue_growth',
-                  'revenue_growth_percent', 'purchases_wins', 'purchases_total', 'purchases_lost', 'revenue_lost',
-                  'bg_overpayment_percent', 'bg_sum', 'competitor_inn', 'competitor_ogrn', 'competitor_full_name',
-                  'competitor_short_name', 'competitor_growth_percent', 'competitor_purchases_wins',
-                  'competitor_purchases_total', 'competitor_bg_saving_economy', )
+        fields = (
+            'inn', 'ogrn', 'company_name', 'company_short_name', 'revenue_2019', 'revenue_2018', 'revenue_growth',
+            'revenue_growth_perc', 'purchases_wins', 'purchases_total', 'purchases_lost', 'revenue_lost',
+            'bg_overpayment_perc', 'bg_sum', 'competitor',
+        )
+
+    def get_competitor_dict(self, obj):
+        return {
+            "inn": obj.competitor_inn,
+            "ogrn": obj.competitor_ogrn,
+            "companyName": obj.competitor_full_name,
+            "companyShortName": obj.competitor_short_name,
+            "revenueGrowthPerc": obj.competitor_growth_percent,
+            "purchasesWins": obj.competitor_purchases_wins,
+            "purchasesTotal": obj.competitor_purchases_total,
+            "bgSavingEconomy": obj.competitor_bg_saving_economy
+        }
