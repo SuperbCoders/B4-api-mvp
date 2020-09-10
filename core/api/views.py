@@ -2,6 +2,7 @@ from dadata import Dadata
 from django.conf import settings
 from drf_firebase_auth.authentication import FirebaseAuthentication
 from rest_framework import permissions, mixins
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from core.api.serializers import CompanyPropSerializer, CompanyFileSerializer, CompanyRecommendSerializer, \
@@ -64,12 +65,17 @@ class WarrantyViewSet(ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-class CompanyViewSet(mixins.ListModelMixin, GenericViewSet):
+class CompanyViewSet(GenericViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     permission_classes = (permissions.AllowAny, )
     authentication_classes = []
     pagination_class = None
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset)
+        return Response(serializer.data)
 
     def get_queryset(self):
         inn = self.kwargs['inn']
