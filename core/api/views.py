@@ -64,7 +64,7 @@ class CompanyViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     permission_classes = (permissions.AllowAny, )
-    authentication_classes = (FirebaseAuthentication, )
+    authentication_classes = []
 
     def get_queryset(self):
         inn = self.kwargs['inn']
