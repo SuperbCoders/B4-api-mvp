@@ -7,6 +7,7 @@ class CompanyPropSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyProp
         fields = ('id', 'company', 'bank_name', 'account_number', 'bik', 'dadata', )
+        read_only_fields = ['dadata']
 
 
 class CompanyFileSerializer(serializers.ModelSerializer):
