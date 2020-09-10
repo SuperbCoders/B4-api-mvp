@@ -33,11 +33,11 @@ class Company(models.Model):
     competitor_purchases_wins = models.PositiveIntegerField(verbose_name='Удачных покупок конкурента')
     competitor_purchases_total = models.PositiveIntegerField(verbose_name='Всего покупок конкурента')
     competitor_bg_saving_economy = models.DecimalField(max_digits=50, decimal_places=2,
-                                                       verbose_name='Экономия кнкурента')
+                                                       verbose_name='Экономия конкурента')
 
     class Meta:
         verbose_name = 'Компания'
-        verbose_name_plural = 'Коимпании'
+        verbose_name_plural = 'Компании(лендинги)'
 
 
 class CompanyProp(models.Model):
@@ -49,7 +49,7 @@ class CompanyProp(models.Model):
     dadata = models.JSONField(verbose_name='ДаДата')
 
     class Meta:
-        verbose_name = 'Реквизиы компании'
+        verbose_name = 'Реквизиты компании'
         verbose_name_plural = 'Реквизиты компании'
 
 
@@ -74,11 +74,11 @@ class CompanyRecommend(models.Model):
     published_at = models.DateTimeField(verbose_name='Дата публикации')
     federal_law = models.CharField(max_length=20, verbose_name='ФЗ')
     warranty_approved = models.BooleanField(default=False, verbose_name='Одобрена гарантия')
-    warranty_sum = models.PositiveIntegerField(verbose_name='Сумма гарнатии')
+    warranty_sum = models.PositiveIntegerField(verbose_name='Сумма гарантии')
 
     class Meta:
-        verbose_name = 'Рекомендоация для компании'
-        verbose_name_plural = 'Рекомендоации для компании'
+        verbose_name = 'Рекомендация для компании'
+        verbose_name_plural = 'Рекомендации для компании'
 
 
 class Warranty(models.Model):
