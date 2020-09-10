@@ -65,6 +65,7 @@ class CompanyViewSet(mixins.ListModelMixin, GenericViewSet):
     serializer_class = CompanySerializer
     permission_classes = (permissions.AllowAny, )
     authentication_classes = []
+    pagination_class = None
 
     def get_queryset(self):
         inn = self.kwargs['inn']
