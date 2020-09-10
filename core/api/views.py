@@ -74,7 +74,10 @@ class CompanyViewSet(GenericViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        serializer = self.get_serializer(queryset)
+        obj = queryset.first()
+        if not obj:
+            return Response(status=404)
+        serializer = self.get_serializer(obj)
         return Response(serializer.data)
 
     def get_queryset(self):
