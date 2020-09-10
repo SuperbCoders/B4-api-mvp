@@ -13,6 +13,7 @@ class CompanyPropViewSet(ModelViewSet):
     queryset = CompanyProp.objects.all()
     serializer_class = CompanyPropSerializer
     permission_classes = (permissions.IsAuthenticated, )
+    pagination_class = None
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
@@ -32,6 +33,7 @@ class CompanyFileViewSet(ModelViewSet):
     serializer_class = CompanyFileSerializer
     permission_classes = (permissions.IsAuthenticated, )
     authentication_classes = (FirebaseAuthentication, )
+    pagination_class = None
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
@@ -45,6 +47,7 @@ class CompanyRecommendViewSet(ModelViewSet):
     serializer_class = CompanyRecommendSerializer
     permission_classes = (permissions.IsAuthenticated, )
     authentication_classes = (FirebaseAuthentication, )
+    pagination_class = None
 
 
 class WarrantyViewSet(ModelViewSet):
@@ -52,6 +55,7 @@ class WarrantyViewSet(ModelViewSet):
     serializer_class = WarrantySerializer
     permission_classes = (permissions.IsAuthenticated, )
     authentication_classes = (FirebaseAuthentication, )
+    pagination_class = None
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
