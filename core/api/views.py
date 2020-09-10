@@ -1,8 +1,8 @@
+from dadata import Dadata
+from django.conf import settings
 from drf_firebase_auth.authentication import FirebaseAuthentication
-from rest_framework import viewsets, permissions, mixins, generics
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet, ModelViewSet, ReadOnlyModelViewSet
+from rest_framework import permissions, mixins
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from core.api.serializers import CompanyPropSerializer, CompanyFileSerializer, CompanyRecommendSerializer, \
     CompanySerializer, WarrantySerializer
@@ -13,6 +13,18 @@ class CompanyPropViewSet(ModelViewSet):
     queryset = CompanyProp.objects.all()
     serializer_class = CompanyPropSerializer
     permission_classes = (permissions.IsAuthenticated, )
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        dadata = Dadata(settings.DADATA_API_KEY)
+        result = dadata.find_by_id("bank", serializer.validated_data['bik'])
+
+        serializer.save(
+            user=self.request.user,
+            dadata={'result': result},
+        )
 
 
 class CompanyFileViewSet(ModelViewSet):

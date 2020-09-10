@@ -17,6 +17,7 @@ DATABASES = {
     }
 }
 
+import os
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'files', 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'files', 'static')
 
