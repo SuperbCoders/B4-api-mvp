@@ -1,12 +1,15 @@
 from dadata import Dadata
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.http import Http404
 from drf_firebase_auth.authentication import FirebaseAuthentication
 from rest_framework import permissions, mixins
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from core.api.serializers import CompanyPropSerializer, CompanyFileSerializer, CompanyRecommendSerializer, \
-    CompanySerializer, WarrantySerializer
+    CompanySerializer, WarrantySerializer, UserSerializer
 from core.models import CompanyProp, CompanyFile, CompanyRecommend, Company, Warranty
 
 
@@ -65,6 +68,28 @@ class WarrantyViewSet(ModelViewSet):
         serializer.save(user=self.request.user)
 
 
+class UserViewSet(GenericViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
+
+    def get_queryset(self):
+        return super().get_queryset().filter(id=self.request.user.id)
+
+    def get_object(self):
+        return self.request.user
+
+    @action(methods=['get'], detail=False)
+    def me(self, *args, **kwargs):
+        try:
+            instance = self.get_queryset().get(id=self.request.user.id)
+        except User.DoesNotExist:
+            raise Http404
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
 class CompanyViewSet(GenericViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
@@ -77,6 +102,8 @@ class CompanyViewSet(GenericViewSet):
         obj = queryset.first()
         if not obj:
             return Response(status=404)
+        if request.user.is_authenticated:
+            obj.users.add(request.user)
         serializer = self.get_serializer(obj)
         return Response(serializer.data)
 

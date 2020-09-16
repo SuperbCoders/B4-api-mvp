@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from core.models import Company, CompanyProp, CompanyFile, CompanyRecommend, Warranty
@@ -52,3 +53,11 @@ class CompanySerializer(serializers.ModelSerializer):
             "purchasesTotal": obj.competitor_purchases_total,
             "bgSavingEconomy": obj.competitor_bg_saving_economy
         }
+
+
+class UserSerializer(serializers.ModelSerializer):
+    companies = CompanySerializer(read_only=True, many=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'companies',)

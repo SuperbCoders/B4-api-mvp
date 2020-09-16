@@ -35,9 +35,22 @@ class Company(models.Model):
     competitor_bg_saving_economy = models.DecimalField(max_digits=50, decimal_places=2,
                                                        verbose_name='Экономия конкурента')
 
+    users = models.ManyToManyField('auth.User', related_name='companies', blank=True, through='core.CompanyUser', verbose_name='Пользователи')
+
     class Meta:
         verbose_name = 'Компания'
         verbose_name_plural = 'Компании(лендинги)'
+
+
+class CompanyUser(models.Model):
+    company = models.ForeignKey(Company, related_name='company_users', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', related_name='company_users', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Компания: пользователь'
+        verbose_name_plural = 'Компании: привязанные пользователи'
+        ordering = ['-created_at']
 
 
 class CompanyProp(models.Model):

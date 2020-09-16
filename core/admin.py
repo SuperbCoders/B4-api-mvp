@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Company, CompanyProp, CompanyFile, CompanyRecommend, Warranty
+from core.models import Company, CompanyProp, CompanyFile, CompanyRecommend, Warranty, CompanyUser
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -30,3 +30,4 @@ admin.site.register(CompanyProp, CompanyPropAdmin)
 admin.site.register(CompanyFile, CompanyFileAdmin)
 admin.site.register(CompanyRecommend, CompanyRecommendAdmin)
 admin.site.register(Warranty, WarrantyAdmin)
+admin.site.register(CompanyUser)
