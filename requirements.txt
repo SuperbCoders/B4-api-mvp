@@ -10,3 +10,4 @@ sentry-sdk==0.17.3
 django-ckeditor==6.0.0
 drf-firebase-auth==0.0.8
 dadata==20.7.0
+django-cors-headers==3.5.0
