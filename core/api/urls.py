@@ -8,7 +8,7 @@ from core.api.views import CompanyPropViewSet, CompanyFileViewSet, CompanyRecomm
 
 urlpatterns = []
 
-router = routers.DefaultRouter(trailing_slash=True)
+router = routers.DefaultRouter(trailing_slash=False)
 router.register('company_props', CompanyPropViewSet, basename='company_props')
 router.register('company_files', CompanyFileViewSet, basename='company_files')
 router.register('company_recommends', CompanyRecommendViewSet, basename='company_recommends')
