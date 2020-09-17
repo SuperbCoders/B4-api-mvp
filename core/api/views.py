@@ -17,6 +17,7 @@ class CompanyPropViewSet(ModelViewSet):
     queryset = CompanyProp.objects.all()
     serializer_class = CompanyPropSerializer
     permission_classes = (permissions.IsAuthenticated, )
+    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def get_queryset(self):
@@ -94,7 +95,7 @@ class CompanyViewSet(GenericViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     permission_classes = (permissions.AllowAny, )
-    authentication_classes = []
+    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def list(self, request, *args, **kwargs):
