@@ -59,7 +59,7 @@ AUTH_PASSWORD_VALIDATORS = []
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'drf_firebase_auth.authentication.FirebaseAuthentication',
+        'drf_firebase_auth.authentication.FirebaseAuthentication',
         # 'auth2.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': (
