@@ -73,6 +73,7 @@ class UserViewSet(GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def get_queryset(self):
