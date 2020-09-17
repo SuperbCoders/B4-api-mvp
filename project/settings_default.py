@@ -143,5 +143,6 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 
 DRF_FIREBASE_AUTH = {
-    'FIREBASE_SERVICE_ACCOUNT_KEY': 'project/config/firebase.json'
+    'FIREBASE_SERVICE_ACCOUNT_KEY': 'project/config/firebase.json',
+    'FIREBASE_ATTEMPT_CREATE_WITH_DISPLAY_NAME': False,
 }
