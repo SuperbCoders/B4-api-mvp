@@ -61,3 +61,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'companies',)
+
+
+class UserCompany(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ('inn',)

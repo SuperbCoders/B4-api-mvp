@@ -14,7 +14,7 @@ router.register('company_files', CompanyFileViewSet, basename='company_files')
 router.register('company_recommends', CompanyRecommendViewSet, basename='company_recommends')
 router.register('warranties', WarrantyViewSet, basename='warranties')
 router.register('companies/(?P<inn>[0-9]+)', CompanyViewSet, basename='companies')
-router.register('me', UserViewSet, basename='users')
+router.register('user', UserViewSet, basename='users')
 
 urlpatterns += router.urls
 

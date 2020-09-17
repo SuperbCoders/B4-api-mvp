@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from core.api.serializers import CompanyPropSerializer, CompanyFileSerializer, CompanyRecommendSerializer, \
-    CompanySerializer, WarrantySerializer, UserSerializer
+    CompanySerializer, WarrantySerializer, UserSerializer, UserCompany
 from core.models import CompanyProp, CompanyFile, CompanyRecommend, Company, Warranty
 
 
@@ -81,6 +81,12 @@ class UserViewSet(GenericViewSet):
     def get_object(self):
         return self.request.user
 
+    def get_serializer_class(self):
+        if self.action == 'add_company':
+            return UserCompany
+        else:
+            return super().get_serializer_class()
+
     @action(methods=['get'], detail=False)
     def me(self, *args, **kwargs):
         try:
@@ -89,6 +95,13 @@ class UserViewSet(GenericViewSet):
             raise Http404
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+    @action(methods=['patch'], detail=False)
+    def add_company(self):
+        company_inn = self.request.data['inn']
+        company = Company.objects.get(inn=company_inn)
+        self.request.user.add(company)
+        return Response(status=204)
 
 
 class CompanyViewSet(GenericViewSet):
@@ -103,8 +116,6 @@ class CompanyViewSet(GenericViewSet):
         obj = queryset.first()
         if not obj:
             return Response(status=404)
-        if request.user.is_authenticated:
-            obj.users.add(request.user)
         serializer = self.get_serializer(obj)
         return Response(serializer.data)
 
