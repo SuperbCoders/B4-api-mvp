@@ -10,7 +10,7 @@ class Company(models.Model):
     company_name = models.TextField(max_length=1000, verbose_name='Полное название')
     company_short_name = models.TextField(max_length=1000, verbose_name='Сокращенное название')
 
-    inn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ИНН')
+    inn = models.CharField(primary_key=True, max_length=50, validators=[isdigit_validator], verbose_name='ИНН')
     ogrn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ОГРН')
     revenue_2019 = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Доход за 2019')
     revenue_2018 = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Доход за 2018')
