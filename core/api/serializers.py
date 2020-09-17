@@ -37,7 +37,7 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = (
-            'inn', 'ogrn', 'company_name', 'company_short_name', 'revenue_2019', 'revenue_2018', 'revenue_growth',
+            'id', 'inn', 'ogrn', 'company_name', 'company_short_name', 'revenue_2019', 'revenue_2018', 'revenue_growth',
             'revenue_growth_perc', 'purchases_wins', 'purchases_total', 'purchases_lost', 'revenue_lost',
             'bg_overpayment_perc', 'bg_sum', 'competitor',
         )
