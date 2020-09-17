@@ -97,7 +97,7 @@ class UserViewSet(GenericViewSet):
         return Response(serializer.data)
 
     @action(methods=['patch'], detail=False)
-    def add_company(self):
+    def add_company(self, *args, **kwargs):
         company_inn = self.request.data['inn']
         company = Company.objects.get(inn=company_inn)
         self.request.user.add(company)
