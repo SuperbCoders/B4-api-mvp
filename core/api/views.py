@@ -101,7 +101,7 @@ class UserViewSet(GenericViewSet):
     def add_company(self, *args, **kwargs):
         company_inn = self.request.data['inn']
         company = Company.objects.get(inn=company_inn)
-        self.request.user.add(company)
+        self.request.user.companies.add(company)
         return Response(status=204)
 
 
