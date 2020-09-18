@@ -59,8 +59,7 @@ AUTH_PASSWORD_VALIDATORS = []
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'drf_firebase_auth.authentication.FirebaseAuthentication',
-        # 'auth2.authentication.TokenAuthentication',
+        "firebase_auth.authentication.FirebaseAuthentication"
     ],
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
@@ -142,7 +141,6 @@ DATETIME_INPUT_FORMATS = [
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 
-DRF_FIREBASE_AUTH = {
-    'FIREBASE_SERVICE_ACCOUNT_KEY': 'project/config/firebase.json',
-    'FIREBASE_ATTEMPT_CREATE_WITH_DISPLAY_NAME': False,
+FIREBASE_AUTH = {
+    "SERVICE_ACCOUNT_KEY_FILE": 'project/config/firebase.json'
 }

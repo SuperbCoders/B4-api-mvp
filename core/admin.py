@@ -25,9 +25,14 @@ class WarrantyAdmin(admin.ModelAdmin):
                     'purchase_date', 'start_date', 'end_date', )
 
 
+class CompanyUserAdmin(admin.ModelAdmin):
+    list_display = ('company', 'user', 'created_at')
+    list_filter = ('company', 'user', 'created_at')
+
+
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(CompanyProp, CompanyPropAdmin)
 admin.site.register(CompanyFile, CompanyFileAdmin)
 admin.site.register(CompanyRecommend, CompanyRecommendAdmin)
 admin.site.register(Warranty, WarrantyAdmin)
-admin.site.register(CompanyUser)
+admin.site.register(CompanyUser, CompanyUserAdmin)

@@ -1,4 +1,3 @@
-from drf_firebase_auth.authentication import FirebaseAuthentication
 from rest_framework import permissions
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
 from rest_framework.viewsets import GenericViewSet
@@ -12,7 +11,6 @@ class APIFileViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, Li
     queryset = APIFile.objects.all()
     serializer_class = APIFileSerializer
     permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = (FirebaseAuthentication, )
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)

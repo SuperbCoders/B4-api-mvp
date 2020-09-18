@@ -2,7 +2,6 @@ from dadata import Dadata
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import Http404
-from drf_firebase_auth.authentication import FirebaseAuthentication
 from rest_framework import permissions, mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -17,7 +16,6 @@ class CompanyPropViewSet(ModelViewSet):
     queryset = CompanyProp.objects.all()
     serializer_class = CompanyPropSerializer
     permission_classes = (permissions.IsAuthenticated, )
-    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def get_queryset(self):
@@ -37,7 +35,6 @@ class CompanyFileViewSet(ModelViewSet):
     queryset = CompanyFile.objects.all()
     serializer_class = CompanyFileSerializer
     permission_classes = (permissions.IsAuthenticated, )
-    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def get_queryset(self):
@@ -51,7 +48,6 @@ class CompanyRecommendViewSet(ModelViewSet):
     queryset = CompanyRecommend.objects.all()
     serializer_class = CompanyRecommendSerializer
     permission_classes = (permissions.IsAuthenticated, )
-    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
 
@@ -59,7 +55,6 @@ class WarrantyViewSet(ModelViewSet):
     queryset = Warranty.objects.all()
     serializer_class = WarrantySerializer
     permission_classes = (permissions.IsAuthenticated, )
-    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def get_queryset(self):
@@ -73,7 +68,6 @@ class UserViewSet(GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def get_queryset(self):
@@ -109,7 +103,6 @@ class CompanyViewSet(GenericViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
-    # authentication_classes = (FirebaseAuthentication, )
     pagination_class = None
 
     def list(self, request, *args, **kwargs):
