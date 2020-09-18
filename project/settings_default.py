@@ -17,7 +17,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'ckeditor',
-    'drf_firebase_auth',
     'corsheaders',
 ]
 
