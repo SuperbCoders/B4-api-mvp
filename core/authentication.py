@@ -13,6 +13,8 @@ class FirebaseAuthentication(DefaultFirebaseAuthentication):
     Authorizaiton header using Bearer scheme.
     """
 
+    auth_header_prefix = 'JWT'
+
     def create_user_from_firebase(self, uid, firebase_user):
         fields = {self.uid_field: uid, "email": firebase_user.email or ''}
 
