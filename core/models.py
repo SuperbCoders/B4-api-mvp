@@ -101,6 +101,7 @@ class Warranty(models.Model):
     email = models.EmailField(blank=True, verbose_name='Почта')
     purchase_number = models.CharField(max_length=50, validators=[isdigit_validator],
                                        verbose_name='Реестровый номер торгов')
+    law = models.CharField(max_length=100, verbose_name='Закон')
     bg_type = models.CharField(max_length=100, verbose_name='Вид банковской гарантии')
     purchase_date = models.DateTimeField(verbose_name='Дата тендера(аукциона)')
     start_date = models.DateTimeField(verbose_name='Дата начала гарантии')

@@ -28,7 +28,7 @@ class WarrantySerializer(serializers.ModelSerializer):
     class Meta:
         model = Warranty
         fields = ('id', 'user', 'contact_name', 'phone', 'email', 'purchase_number', 'bg_type',
-                  'purchase_date', 'start_date', 'end_date', )
+                  'purchase_date', 'start_date', 'end_date', 'law')
         read_only_fields = ['user', 'contact_name', 'phone', 'email']
 
 
