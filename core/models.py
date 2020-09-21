@@ -96,9 +96,9 @@ class CompanyRecommend(models.Model):
 
 class Warranty(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='warranties', on_delete=models.CASCADE,)
-    contact_name = models.TextField(max_length=1000, verbose_name='Имя')
-    phone = models.BigIntegerField(verbose_name='Телефон')
-    email = models.EmailField(verbose_name='Почта')
+    contact_name = models.TextField(max_length=1000, blank=True, verbose_name='Имя')
+    phone = models.BigIntegerField(null=True, blank=True, verbose_name='Телефон')
+    email = models.EmailField(blank=True, verbose_name='Почта')
     purchase_number = models.CharField(max_length=50, validators=[isdigit_validator],
                                        verbose_name='Реестровый номер торгов')
     bg_type = models.CharField(max_length=100, verbose_name='Вид банковской гарантии')
