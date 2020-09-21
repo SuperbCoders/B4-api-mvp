@@ -27,7 +27,7 @@ class CompanyRecommendSerializer(serializers.ModelSerializer):
 class WarrantySerializer(serializers.ModelSerializer):
     class Meta:
         model = Warranty
-        fields = ('id', 'user', 'contact_name', 'phone', 'email', 'purchase_number', 'bg_type', 'bg_sum',
+        fields = ('id', 'user', 'contact_name', 'phone', 'email', 'purchase_number', 'bg_type',
                   'purchase_date', 'start_date', 'end_date', )
         read_only_fields = ['user', 'contact_name', 'phone', 'email']
 

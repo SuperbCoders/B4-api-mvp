@@ -21,7 +21,7 @@ class CompanyRecommendAdmin(admin.ModelAdmin):
 
 
 class WarrantyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'contact_name', 'phone', 'email', 'purchase_number', 'bg_type', 'bg_sum',
+    list_display = ('id', 'user', 'contact_name', 'phone', 'email', 'purchase_number', 'bg_type',
                     'purchase_date', 'start_date', 'end_date', )
 
 

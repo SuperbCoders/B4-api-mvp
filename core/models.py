@@ -102,7 +102,6 @@ class Warranty(models.Model):
     purchase_number = models.CharField(max_length=50, validators=[isdigit_validator],
                                        verbose_name='Реестровый номер торгов')
     bg_type = models.CharField(max_length=100, verbose_name='Вид банковской гарантии')
-    bg_sum = models.PositiveIntegerField(verbose_name='Сумма гарнатии')
     purchase_date = models.DateTimeField(verbose_name='Дата тендера(аукциона)')
     start_date = models.DateTimeField(verbose_name='Дата начала гарантии')
     end_date = models.DateTimeField(verbose_name='Дата конца гарантии')
