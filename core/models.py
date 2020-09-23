@@ -41,11 +41,15 @@ class Company(models.Model):
         verbose_name = 'Компания'
         verbose_name_plural = 'Компании(лендинги)'
 
+    def __str__(self):
+        return f'{self.inn} {self.company_name}'
+
 
 class CompanyUser(models.Model):
-    company = models.ForeignKey(Company, related_name='company_users', on_delete=models.CASCADE)
-    user = models.ForeignKey('auth.User', related_name='company_users', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    company = models.ForeignKey(Company, related_name='company_users', on_delete=models.CASCADE, verbose_name='Компания')
+    user = models.ForeignKey('auth.User', related_name='company_users', on_delete=models.CASCADE, verbose_name='Пользователь')
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Создано в')
+    was_processed = models.BooleanField(default=False, verbose_name='Было обработано')
 
     class Meta:
         verbose_name = 'Компания: пользователь'
@@ -77,9 +81,9 @@ class CompanyFile(models.Model):
 
 
 class CompanyRecommend(models.Model):
-    company = models.ForeignKey('Company', related_name='company_recommends', on_delete=models.CASCADE)
-    competitor_full_name = models.TextField(max_length=1000, verbose_name='Полное название конкурента')
-    competitor_short_name = models.TextField(max_length=1000, verbose_name='Сокращенное название конкурента')
+    company = models.ForeignKey('Company', related_name='company_recommends', on_delete=models.CASCADE, verbose_name='Компания')
+    competitor_full_name = models.TextField(max_length=1000, verbose_name='Заказчик')
+    competitor_short_name = models.TextField(max_length=1000, verbose_name='Предмет обращения')
     competitor_growth_percent = models.DecimalField(max_digits=5, decimal_places=2,
                                                  verbose_name='Рост выручки конкурента в процентах')
     account_number = models.CharField(max_length=16, validators=[account_number_validator], verbose_name='Номер счета')

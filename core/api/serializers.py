@@ -34,6 +34,7 @@ class WarrantySerializer(serializers.ModelSerializer):
 
 class CompanySerializer(serializers.ModelSerializer):
     competitor = serializers.SerializerMethodField(method_name='get_competitor_dict')
+    was_processed = serializers.SerializerMethodField(method_name='get_was_processed')
 
     class Meta:
         model = Company
@@ -42,6 +43,15 @@ class CompanySerializer(serializers.ModelSerializer):
             'revenue_growth_perc', 'purchases_wins', 'purchases_total', 'purchases_lost', 'revenue_lost',
             'bg_overpayment_perc', 'bg_sum', 'competitor',
         )
+
+    def get_was_processed(self, obj):
+        if self.context['request'].user.is_anonymous:
+            return None
+
+        company_user = obj.users.filter(user=self.context['request'].user).first()
+        if company_user:
+            return company_user.was_processed
+        return None
 
     def get_competitor_dict(self, obj):
         return {

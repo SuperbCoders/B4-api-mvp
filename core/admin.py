@@ -26,8 +26,8 @@ class WarrantyAdmin(admin.ModelAdmin):
 
 
 class CompanyUserAdmin(admin.ModelAdmin):
-    list_display = ('company', 'user', 'created_at')
-    list_filter = ('company', 'user', 'created_at')
+    list_display = ('company', 'user', 'was_processed', 'created_at')
+    list_filter = ('company', 'user', 'was_processed', 'created_at')
 
 
 admin.site.register(Company, CompanyAdmin)
