@@ -41,7 +41,7 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = (
             'inn', 'ogrn', 'company_name', 'company_short_name', 'revenue_2019', 'revenue_2018', 'revenue_growth',
             'revenue_growth_perc', 'purchases_wins', 'purchases_total', 'purchases_lost', 'revenue_lost',
-            'bg_overpayment_perc', 'bg_sum', 'competitor',
+            'bg_overpayment_perc', 'bg_sum', 'competitor', 'was_processed'
         )
 
     def get_was_processed(self, obj):
