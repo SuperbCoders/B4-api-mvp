@@ -4,15 +4,17 @@ from django.contrib.auth.models import User
 from django.http import Http404
 from rest_framework import permissions, mixins
 from rest_framework.decorators import action
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
+from core.api.filters import CompanyRecommendFilter
 from core.api.serializers import CompanyPropSerializer, CompanyFileSerializer, CompanyRecommendSerializer, \
     CompanySerializer, WarrantySerializer, UserSerializer, UserCompany
 from core.models import CompanyProp, CompanyFile, CompanyRecommend, Company, Warranty
 
 
-class CompanyPropViewSet(ModelViewSet):
+class CompanyPropViewSet(ListModelMixin, UpdateModelMixin, CreateModelMixin, GenericViewSet):
     queryset = CompanyProp.objects.all()
     serializer_class = CompanyPropSerializer
     permission_classes = (permissions.IsAuthenticated, )
@@ -31,7 +33,7 @@ class CompanyPropViewSet(ModelViewSet):
         )
 
 
-class CompanyFileViewSet(ModelViewSet):
+class CompanyFileViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
     queryset = CompanyFile.objects.all()
     serializer_class = CompanyFileSerializer
     permission_classes = (permissions.IsAuthenticated, )
@@ -44,14 +46,27 @@ class CompanyFileViewSet(ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-class CompanyRecommendViewSet(ModelViewSet):
+class CompanyRecommendViewSet(ListModelMixin, GenericViewSet):
     queryset = CompanyRecommend.objects.all()
     serializer_class = CompanyRecommendSerializer
     permission_classes = (permissions.IsAuthenticated, )
     pagination_class = None
+    filter_class = CompanyRecommendFilter
+
+    def get_company(self):
+        return Company.objects.get(id=self.request.GET['company'])
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user, company=self.get_company())
+
+    def list(self, request, *args, **kwargs):
+        if not self.request.GET.get('company'):
+            return Response({'errors': 'no company filter found'}, status=400)
+
+        return super().list(request, *args, **kwargs)
 
 
-class WarrantyViewSet(ModelViewSet):
+class WarrantyViewSet(CreateModelMixin, GenericViewSet):
     queryset = Warranty.objects.all()
     serializer_class = WarrantySerializer
     permission_classes = (permissions.IsAuthenticated, )

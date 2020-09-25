@@ -20,8 +20,7 @@ class CompanyFileSerializer(serializers.ModelSerializer):
 class CompanyRecommendSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyRecommend
-        fields = ('id', 'company', 'competitor_full_name', 'competitor_short_name', 'competitor_growth_percent',
-                  'account_number', 'total', 'published_at', 'federal_law', 'warranty_approved', 'warranty_sum', )
+        exclude = ['id']
 
 
 class WarrantySerializer(serializers.ModelSerializer):

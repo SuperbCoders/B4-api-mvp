@@ -82,16 +82,16 @@ class CompanyFile(models.Model):
 
 class CompanyRecommend(models.Model):
     company = models.ForeignKey('Company', related_name='company_recommends', on_delete=models.CASCADE, verbose_name='Компания')
-    competitor_full_name = models.TextField(max_length=1000, verbose_name='Заказчик')
-    competitor_short_name = models.TextField(max_length=1000, verbose_name='Предмет обращения')
-    competitor_growth_percent = models.DecimalField(max_digits=5, decimal_places=2,
-                                                 verbose_name='Рост выручки конкурента в процентах')
-    account_number = models.CharField(max_length=16, validators=[account_number_validator], verbose_name='Номер счета')
+    customer = models.TextField(max_length=1000, verbose_name='Заказчик')
+    topic = models.TextField(max_length=1000, verbose_name='Описание закупки')
+    probability_of_victory = models.DecimalField(max_digits=5, decimal_places=2,verbose_name='Вероятность победы')
+    account_number = models.CharField(max_length=250, verbose_name='Номер тендера')
     total = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Сумма')
     published_at = models.DateTimeField(verbose_name='Дата публикации')
     federal_law = models.CharField(max_length=20, verbose_name='ФЗ')
     warranty_approved = models.BooleanField(default=False, verbose_name='Одобрена гарантия')
     warranty_sum = models.PositiveIntegerField(verbose_name='Сумма гарантии')
+    tender_link = models.URLField(verbose_name='Ссылка на тендер')
 
     class Meta:
         verbose_name = 'Рекомендация для компании'

@@ -16,8 +16,7 @@ class CompanyFileAdmin(admin.ModelAdmin):
 
 
 class CompanyRecommendAdmin(admin.ModelAdmin):
-    list_display = ('id', 'company', 'competitor_full_name', 'competitor_short_name', 'competitor_growth_percent',
-                    'account_number', 'total', 'published_at', 'federal_law', 'warranty_approved', 'warranty_sum', )
+    list_display = ('id', 'company', 'customer', 'tender_link',)
 
 
 class WarrantyAdmin(admin.ModelAdmin):

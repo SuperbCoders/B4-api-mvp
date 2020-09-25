@@ -7,7 +7,7 @@ from filestorage.api.serializers import APIFileSerializer
 from filestorage.models import APIFile
 
 
-class APIFileViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin, GenericViewSet):
+class APIFileViewSet(CreateModelMixin, GenericViewSet):
     queryset = APIFile.objects.all()
     serializer_class = APIFileSerializer
     permission_classes = (permissions.IsAuthenticated,)
