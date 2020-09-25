@@ -57,7 +57,7 @@ class CompanyRecommendViewSet(ListModelMixin, GenericViewSet):
         return Company.objects.get(inn=self.request.GET['company'])
 
     def get_queryset(self):
-        return super().get_queryset().filter(user=self.request.user, company=self.get_company())
+        return super().get_queryset().filter(company=self.get_company())
 
     def list(self, request, *args, **kwargs):
         if not self.request.GET.get('company'):
