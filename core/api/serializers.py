@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from core.models import Company, CompanyProp, CompanyFile, CompanyRecommend, Warranty
+from core.models import Company, CompanyProp, CompanyFile, CompanyRecommend, Warranty, CompanyUser
 
 
 class CompanyPropSerializer(serializers.ModelSerializer):
@@ -47,7 +47,7 @@ class CompanySerializer(serializers.ModelSerializer):
         if self.context['request'].user.is_anonymous:
             return None
 
-        company_user = obj.users.filter(id=self.context['request'].user.id).first()
+        company_user = CompanyUser.objects.filter(company=obj, user=self.context['request'].user).first()
         if company_user:
             return company_user.was_processed
         return None
