@@ -47,7 +47,7 @@ class CompanySerializer(serializers.ModelSerializer):
         if self.context['request'].user.is_anonymous:
             return None
 
-        company_user = obj.users.filter(user=self.context['request'].user).first()
+        company_user = obj.users.filter(id=self.context['request'].user.id).first()
         if company_user:
             return company_user.was_processed
         return None
