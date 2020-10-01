@@ -14,7 +14,7 @@ from core.models import Company
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        files = listdir('import')
+        files = listdir('project/import')
 
         print(files)
 
