@@ -12,28 +12,25 @@ class Company(models.Model):
 
     inn = models.CharField(primary_key=True, max_length=50, validators=[isdigit_validator], verbose_name='ИНН')
     ogrn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ОГРН')
-    revenue_2019 = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Доход за 2019')
-    revenue_2018 = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Доход за 2018')
-    revenue_growth = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Рост выручки')
-    revenue_growth_perc = models.DecimalField(max_digits=5, decimal_places=2,
-                                                 verbose_name='Рост выручки в процентах')
+    revenue_2019 = models.CharField(max_length=250, verbose_name='Доход за 2019')
+    revenue_2018 = models.CharField(max_length=250, verbose_name='Доход за 2018')
+    revenue_growth = models.CharField(max_length=250, verbose_name='Рост выручки')
+    revenue_growth_perc = models.CharField(max_length=250, verbose_name='Рост выручки в процентах')
     purchases_wins = models.PositiveIntegerField(verbose_name='Удачных покупок')
     purchases_total = models.PositiveIntegerField(verbose_name='Всего покупок')
     purchases_lost = models.PositiveIntegerField(verbose_name='Покупок потеряно')
-    revenue_lost = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Потерянный доход')
-    bg_overpayment_perc = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Перепата в процентах')
-    bg_sum = models.DecimalField(max_digits=50, decimal_places=2, verbose_name='Сумма')
+    revenue_lost = models.CharField(max_length=250, verbose_name='Потерянный доход')
+    bg_overpayment_perc = models.CharField(max_length=250, verbose_name='Перепата в процентах')
+    bg_sum = models.CharField(max_length=250, verbose_name='Сумма')
 
     competitor_inn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ИНН Конкурента')
     competitor_ogrn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ОГРН Конкурента')
     competitor_full_name = models.TextField(max_length=1000, verbose_name='Полное название конкурента')
     competitor_short_name = models.TextField(max_length=1000, verbose_name='Сокращенное название конкурента')
-    competitor_growth_percent = models.DecimalField(max_digits=5, decimal_places=2,
-                                                    verbose_name='Рост выручки конкурента в процентах')
+    competitor_growth_percent = models.CharField(max_length=250, verbose_name='Рост выручки конкурента в процентах')
     competitor_purchases_wins = models.PositiveIntegerField(verbose_name='Удачных покупок конкурента')
     competitor_purchases_total = models.PositiveIntegerField(verbose_name='Всего покупок конкурента')
-    competitor_bg_saving_economy = models.DecimalField(max_digits=50, decimal_places=2,
-                                                       verbose_name='Экономия конкурента')
+    competitor_bg_saving_economy = models.BigIntegerField(verbose_name='Экономия конкурента')
 
     users = models.ManyToManyField('auth.User', related_name='companies', blank=True, through='core.CompanyUser', verbose_name='Пользователи')
 

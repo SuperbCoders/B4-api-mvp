@@ -1,3 +1,6 @@
+from decimal import Decimal
+from pprint import pprint
+
 import time
 from os import listdir
 import json
@@ -19,6 +22,9 @@ class Command(BaseCommand):
             with open(f'import/{file_}', 'r') as f:
                 json_data = json.loads(f.read())
                 print(json_data['inn'])
+
+                if json_data['inn'] == '7743225631':
+                    continue
 
                 try:
                     Company.objects.get_or_create(
@@ -44,10 +50,14 @@ class Command(BaseCommand):
                             'competitor_growth_percent': json_data['competitor']['revenueGrowthPerc'],
                             'competitor_purchases_wins': json_data['competitor']['purchasesWins'],
                             'competitor_purchases_total': json_data['competitor']['purchasesTotal'],
-                            'competitor_bg_saving_economy': json_data['competitor']['bgSavingEconomy'],
+                            'competitor_bg_saving_economy': int(json_data['competitor']['bgSavingEconomy']),
                             # '': json_data['competitor']['contractsSum'],
                         }
                     )
+                except KeyError:
+                    continue
                 except Exception as e:
+                    pprint(json_data)
                     print(json_data['inn'], e)
+                    raise e
 

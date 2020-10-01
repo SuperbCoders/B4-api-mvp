@@ -1,1 +1,27 @@
-{"inn": "7840054300", "ogrn": "1167847296341", "companyName": "Общество с ограниченной ответственностью ПСК \"ПИТЕР СТРОЙ\"", "companyShortName": "ООО ПСК \"ПИТЕР СТРОЙ\"", "revenue2019": 16287000.0, "revenue2018": 17547000.0, "revenueGrowth": -1260000.0, "revenueGrowthPerc": -7.18, "purchasesWins": 3, "purchasesTotal": 27, "purchasesLost": 52, "revenueLost": 578071477.88, "bgOverpaymentPerc": 34.72, "contractsSum": 33350277.57, "competitor": {"inn": "7811613508", "ogrn": "1167847264562", "companyName": "Общество с ограниченной ответственностью \"СТРОИТЕЛЬНАЯ КОМПАНИЯ ПРЕМИУМ\"", "companyShortName": "ООО \"СК ПРЕМИУМ\"", "revenueGrowthPerc": -1674.36, "purchasesWins": 1, "purchasesTotal": 36, "bgSavingEconomy": 2622.2615712, "contractsSum": 2731522.47}}
+{
+  "inn": "7840054300",
+  "ogrn": "1167847296341",
+  "companyName": "Общество с ограниченной ответственностью ПСК \"ПИТЕР СТРОЙ\"",
+  "companyShortName": "ООО ПСК \"ПИТЕР СТРОЙ\"",
+  "revenue2019": 16287000.0,
+  "revenue2018": 17547000.0,
+  "revenueGrowth": -1260000.0,
+  "revenueGrowthPerc": -7.18,
+  "purchasesWins": 3,
+  "purchasesTotal": 27,
+  "purchasesLost": 52,
+  "revenueLost": 578071477.88,
+  "bgOverpaymentPerc": 34.72,
+  "contractsSum": 33350277.57,
+  "competitor": {
+    "inn": "7811613508",
+    "ogrn": "1167847264562",
+    "companyName": "Общество с ограниченной ответственностью \"СТРОИТЕЛЬНАЯ КОМПАНИЯ ПРЕМИУМ\"",
+    "companyShortName": "ООО \"СК ПРЕМИУМ\"",
+    "revenueGrowthPerc": -1674.36,
+    "purchasesWins": 1,
+    "purchasesTotal": 36,
+    "bgSavingEconomy": 2622.26,
+    "contractsSum": 2731522.47
+  }
+}
