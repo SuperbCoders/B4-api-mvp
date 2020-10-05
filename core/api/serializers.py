@@ -44,6 +44,9 @@ class CompanySerializer(serializers.ModelSerializer):
         )
 
     def get_was_processed(self, obj):
+        if obj.was_processed_manually:
+            return obj.was_processed_manually
+
         if self.context['request'].user.is_anonymous:
             return None
 

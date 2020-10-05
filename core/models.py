@@ -23,6 +23,8 @@ class Company(models.Model):
     bg_overpayment_perc = models.CharField(max_length=250, verbose_name='Перепата в процентах')
     bg_sum = models.CharField(max_length=250, verbose_name='Сумма')
 
+    was_processed_manually = models.BooleanField(default=False, verbose_name='Документы проверены')
+
     competitor_inn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ИНН Конкурента')
     competitor_ogrn = models.CharField(max_length=50, validators=[isdigit_validator], verbose_name='ОГРН Конкурента')
     competitor_full_name = models.TextField(max_length=1000, verbose_name='Полное название конкурента')

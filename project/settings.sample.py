@@ -3,6 +3,7 @@ from .settings_default import *
 SECRET_KEY = '123'
 
 DEBUG = True
+SENDPULSE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
