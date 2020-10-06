@@ -80,7 +80,7 @@ class CompanyFile(models.Model):
 
 
 class CompanyRecommend(models.Model):
-    company = models.ForeignKey('Company', related_name='company_recommends', on_delete=models.CASCADE, verbose_name='Компания')
+    company = models.ForeignKey('Company', related_name='company_recommends', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Компания')
     customer = models.TextField(max_length=1000, verbose_name='Заказчик')
     topic = models.TextField(max_length=1000, verbose_name='Описание закупки')
     probability_of_victory = models.DecimalField(max_digits=5, decimal_places=2,verbose_name='Вероятность победы')

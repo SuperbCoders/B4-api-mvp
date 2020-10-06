@@ -57,13 +57,10 @@ class CompanyRecommendViewSet(ListModelMixin, GenericViewSet):
         return Company.objects.get(inn=self.request.GET['company'])
 
     def get_queryset(self):
-        return super().get_queryset().filter(company=self.get_company())
-
-    def list(self, request, *args, **kwargs):
-        if not self.request.GET.get('company'):
-            return Response({'errors': 'no company filter found'}, status=400)
-
-        return super().list(request, *args, **kwargs)
+        if 'company' in self.request.GET:
+            return super().get_queryset().filter(company=self.get_company())
+        else:
+            return super().get_queryset().filter(company__isnull=True)
 
 
 class WarrantyViewSet(CreateModelMixin, GenericViewSet):
