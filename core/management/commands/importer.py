@@ -19,7 +19,7 @@ class Command(BaseCommand):
         print(files)
 
         for file_ in files:
-            with open(f'import/{file_}', 'r') as f:
+            with open(f'project/import/{file_}', 'r') as f:
                 json_data = json.loads(f.read())
                 print(json_data['inn'])
 
