@@ -18,5 +18,5 @@ class FirebaseAuthentication(DefaultFirebaseAuthentication):
     def create_user_from_firebase(self, uid, firebase_user):
         fields = {self.uid_field: uid}
 
-        user, created = User.objects.get_or_create(**fields, defaults={'first_name': firebase_user.phone_number, "email": firebase_user.email or ''})
+        user, created = User.objects.get_or_create(**fields, defaults={'phone': firebase_user.phone_number, "email": firebase_user.email or ''})
         return user

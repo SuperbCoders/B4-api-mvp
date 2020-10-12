@@ -1,16 +1,17 @@
 from curses.ascii import isdigit
 
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
 from core.validators import account_number_validator, isdigit_validator
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser as BaseUser, UserManager
+from django.contrib.auth.models import AbstractUser as BaseUser, UserManager, PermissionsMixin
 
 
-class User(BaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=150)
     uid = models.CharField(max_length=250, unique=True)
-    email = models.EmailField()
+    email = models.EmailField(blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -20,7 +21,7 @@ class User(BaseUser):
     objects = UserManager()
 
     def __str__(self):
-        return self.first_name or self.email or self.username
+        return self.phone or self.email or self.uid
 
     class Meta:
         db_table = 'auth_user'
