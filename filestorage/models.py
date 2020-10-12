@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from filestorage.validators import filename_validator
@@ -6,7 +7,7 @@ from filestorage.utils import file_upload_to, FileInfo
 
 
 class APIFile(models.Model):
-    user = models.ForeignKey('auth.User', related_name='api_files', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='api_files', on_delete=models.CASCADE)
 
     original_filename = models.CharField(max_length=255, blank=True, verbose_name='Имя файла', validators=[filename_validator])
     ext = models.CharField(max_length=255, blank=True, verbose_name='Расширение файла')

@@ -4,6 +4,26 @@ from django.db import models
 
 from core.validators import account_number_validator, isdigit_validator
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser as BaseUser, UserManager
+
+
+class User(BaseUser):
+    phone = models.CharField(max_length=150)
+    uid = models.CharField(max_length=250, unique=True)
+    email = models.EmailField()
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'uid'
+    objects = UserManager()
+
+    def __str__(self):
+        return self.first_name or self.email or self.username
+
+    class Meta:
+        db_table = 'auth_user'
 
 
 class Company(models.Model):
@@ -34,7 +54,7 @@ class Company(models.Model):
     competitor_purchases_total = models.PositiveIntegerField(verbose_name='Всего покупок конкурента')
     competitor_bg_saving_economy = models.BigIntegerField(verbose_name='Экономия конкурента')
 
-    users = models.ManyToManyField('auth.User', related_name='companies', blank=True, through='core.CompanyUser', verbose_name='Пользователи')
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='companies', blank=True, through='core.CompanyUser', verbose_name='Пользователи')
 
     class Meta:
         verbose_name = 'Компания'
@@ -46,7 +66,7 @@ class Company(models.Model):
 
 class CompanyUser(models.Model):
     company = models.ForeignKey(Company, related_name='company_users', on_delete=models.CASCADE, verbose_name='Компания')
-    user = models.ForeignKey('auth.User', related_name='company_users', on_delete=models.CASCADE, verbose_name='Пользователь')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='company_users', on_delete=models.CASCADE, verbose_name='Пользователь')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Создано в')
     was_processed = models.BooleanField(default=False, verbose_name='Было обработано')
 
@@ -98,12 +118,14 @@ class CompanyRecommend(models.Model):
 
 
 class Warranty(models.Model):
+    company = models.ForeignKey('Company', related_name='warranties', on_delete=models.CASCADE, verbose_name='Компания')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='warranties', on_delete=models.CASCADE,)
     contact_name = models.TextField(max_length=1000, blank=True, verbose_name='Имя')
     phone = models.BigIntegerField(null=True, blank=True, verbose_name='Телефон')
     email = models.EmailField(blank=True, verbose_name='Почта')
     purchase_number = models.CharField(max_length=50, validators=[isdigit_validator],
                                        verbose_name='Реестровый номер торгов')
+    bg_sum = models.CharField(max_length=250, verbose_name='Сумма')
     law = models.CharField(max_length=100, verbose_name='Закон')
     bg_type = models.CharField(max_length=100, verbose_name='Вид банковской гарантии')
     purchase_date = models.DateTimeField(verbose_name='Дата тендера(аукциона)')

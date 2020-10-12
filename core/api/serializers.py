@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from core.models import User
 from rest_framework import serializers
 
 from core.models import Company, CompanyProp, CompanyFile, CompanyRecommend, Warranty, CompanyUser
@@ -26,7 +26,7 @@ class CompanyRecommendSerializer(serializers.ModelSerializer):
 class WarrantySerializer(serializers.ModelSerializer):
     class Meta:
         model = Warranty
-        fields = ('id', 'user', 'contact_name', 'phone', 'email', 'purchase_number', 'bg_type',
+        fields = ('id', 'company', 'bg_sum', 'user', 'contact_name', 'phone', 'email', 'purchase_number', 'bg_type',
                   'purchase_date', 'start_date', 'end_date', 'law')
         read_only_fields = ['user', 'contact_name', 'phone', 'email']
 

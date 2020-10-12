@@ -1,6 +1,7 @@
+import requests
 from dadata import Dadata
 from django.conf import settings
-from django.contrib.auth.models import User
+from core.models import User
 from django.http import Http404
 from rest_framework import permissions, mixins
 from rest_framework.decorators import action
@@ -73,7 +74,24 @@ class WarrantyViewSet(CreateModelMixin, GenericViewSet):
         return super().get_queryset().filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        warranty = serializer.save(user=self.request.user)
+
+        data = {
+            "inn": warranty.company.inn,
+            "contactName": warranty.contact_name,
+            "phone": warranty.phone,
+            "email": warranty.email,
+            "purchaseNumber": warranty.purchase_number,
+            "bgType": warranty.bg_type,
+            "bgSum": warranty.bg_sum,
+            "purchaseDate": warranty.purchase_date,
+            "startDate": warranty.start_date,
+            "endDate": warranty.end_date
+        }
+
+        requests.post("https://crm.farzoom.ru/api/leads/bg", data=data, headers={
+            'API-KEY': 'h67p31tzytziy40zp6m4z0fhj1acee9j'
+        })
 
 
 class UserViewSet(GenericViewSet):
